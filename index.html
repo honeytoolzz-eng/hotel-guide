@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>호텔 이용 가이드 | Guest Guide</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<style>
+:root{--bg:#f6f4fb;--card:#fff;--tx:#1d1a2b;--sub:#5f5b74;--ac:#6c4cf1;--ac2:#ff6b9d;--ln:#e4e0f0;--wb:#fff0f2;--wt:#c4143c;--wl:#ffc2cd;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#14121f;--card:#1f1c2e;--tx:#f1eefc;--sub:#b0acc8;--ln:#322e48;--wb:#3a1520;--wt:#ff8fa5;--wl:#5c2433}}
+:root[data-theme="dark"]{--bg:#14121f;--card:#1f1c2e;--tx:#f1eefc;--sub:#b0acc8;--ln:#322e48;--wb:#3a1520;--wt:#ff8fa5;--wl:#5c2433}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:-apple-system,"Apple SD Gothic Neo","Noto Sans KR",system-ui,sans-serif;line-height:1.5}
+a{color:var(--ac);font-weight:700;text-decoration:none}
+.wrap{max-width:480px;margin:0 auto;padding:16px}
+h1{font-size:20px;margin:4px 0 12px;text-align:center}
+.langs{display:flex;gap:6px;justify-content:center;margin-bottom:14px;flex-wrap:wrap}
+.langs button{border:1px solid var(--ln);background:var(--card);color:var(--tx);padding:7px 14px;border-radius:99px;font-size:14px;cursor:pointer}
+.langs button.on{background:var(--ac);color:#fff;border-color:var(--ac)}
+.stage{background:var(--card);border-radius:24px;padding:26px 20px 20px;box-shadow:0 8px 30px rgba(108,76,241,.12);text-align:center;min-height:360px;display:flex;flex-direction:column;align-items:center}
+.bars{display:flex;gap:4px;width:100%;margin-bottom:20px}
+.bars i{flex:1;height:4px;border-radius:4px;background:var(--ln);overflow:hidden;display:block;cursor:pointer}
+.bars i b{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--ac),var(--ac2))}
+.ic{font-size:72px;line-height:1;animation:pop .5s ease}
+@keyframes pop{from{transform:scale(.5);opacity:0}to{transform:scale(1);opacity:1}}
+.n{margin-top:12px;font-size:13px;font-weight:700;color:var(--ac);letter-spacing:.06em}
+.t{font-size:22px;font-weight:800;margin:4px 0 8px}
+.d{font-size:16px;color:var(--sub);max-width:360px;animation:pop .5s ease}
+.warn{display:none;margin-top:10px;background:var(--wb);color:var(--wt);border:1px solid var(--wl);border-radius:10px;padding:8px 12px;font-size:14px;font-weight:700;max-width:360px}
+#pnl{width:100%}
+.pnl{background:#111;border-radius:14px;padding:10px 12px 12px;margin-top:14px;animation:pop .5s ease}
+.cap{color:#aaa;font-size:12px;margin-bottom:8px}
+.row{display:flex;gap:8px}
+.pb{flex:1;position:relative;border:2px solid #3a3a3a;border-radius:8px;padding:8px 2px;font-weight:800;font-size:16px;color:#666;background:#000}
+.pnl.k .pb{border-radius:22px}
+.pb small{display:block;font-size:11px;font-weight:600;margin-top:2px}
+.pb.hl{color:var(--c);border-color:var(--c);animation:blink 1s infinite}
+.pb.no{border-color:#c33;color:#777}
+.pnl.i img{display:block;width:72%;max-width:250px;margin:0 auto;border-radius:12px}.lg{display:grid;grid-template-columns:1fr 1fr;gap:4px 12px;margin-top:10px;text-align:left;font-size:12px;color:#ccc}.lg b{color:#7fb0ff}
+.pb.no::after{content:"✖";position:absolute;right:5px;top:0;color:#ff3b5c;font-size:15px}
+@keyframes blink{50%{opacity:.45}}
+.ctl{display:flex;gap:10px;justify-content:center;margin-top:16px}
+.ctl button{width:52px;height:52px;border-radius:50%;border:none;background:var(--card);color:var(--tx);font-size:20px;box-shadow:0 2px 10px rgba(0,0,0,.1);cursor:pointer}
+.ctl .play{background:var(--ac);color:#fff;width:60px;height:60px;margin-top:-4px}
+.info{margin-top:16px;background:var(--card);border-radius:16px;padding:14px 16px;font-size:14px;color:var(--sub);display:grid;gap:4px}
+.info b{color:var(--tx)}
+.qr{margin-top:16px;background:var(--card);border-radius:24px;padding:22px;text-align:center}
+.qr h2{font-size:17px;margin:0 0 4px}
+.qr p{font-size:14px;color:var(--sub);margin:0 0 14px}
+#qr{display:inline-block;background:#fff;padding:12px;border-radius:14px}
+#qr img,#qr canvas{display:block}
+.pr{margin-top:14px;border:1px solid var(--ac);color:var(--ac);background:none;padding:10px 18px;border-radius:12px;font-size:14px;cursor:pointer}
+.stage .ic{font-size:44px}.stage .t{font-size:21px;margin:2px 0 4px}#items{width:100%}.it{background:var(--bg);border-radius:14px;padding:12px;margin-top:10px;text-align:left}.ih{display:flex;align-items:center;gap:8px;font-size:16px}.ii{font-size:24px}.it p{margin:6px 0 0;font-size:14px;color:var(--sub)}.it .warn{display:block;margin-top:8px;max-width:none}.it .pnl{margin-top:10px}.pnl.i img{width:60%}.kimg{position:relative;width:88%;max-width:300px;margin:0 auto}.kimg svg{width:100%;display:block;overflow:hidden}.rg{position:absolute;border:2px solid #ffd23f;border-radius:8px;animation:blink 1.2s infinite}.mk{position:absolute;width:22px;height:22px;border-radius:50%;background:#ffd23f;color:#000;font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center;transform:translate(-50%,-50%);box-shadow:0 0 0 3px rgba(0,0,0,.5)}.rg.b{border-color:#a78bfa;border-width:3px;box-shadow:0 0 12px #a78bfa;animation:blink .9s infinite}.mk.b{background:#8b5cf6;color:#fff;width:26px;height:26px;font-size:14px}.kl .bl{color:#e9ddff;font-weight:700}.kl .bl i{background:#8b5cf6;color:#fff}.kimg.w{width:100%;max-width:340px}.kimg.n{width:62%;max-width:220px}.kimg.s{width:60%;max-width:230px}.rg.x{border-color:#ff3b5c;border-style:dashed}.mk.x{background:#ff3b5c;color:#fff}.rg.k{border-color:#ffd23f;border-width:3px;box-shadow:0 0 14px #ffd23f;animation:blink .9s infinite}.mk.k{background:#ffd23f;color:#000;width:26px;height:26px;font-size:14px}.kl .kg{color:#ffe9a0;font-weight:700}.kl .kg i{background:#ffd23f;color:#000}.kl .no{color:#ff9db0}.kl .no i{background:#ff3b5c;color:#fff}.kl{margin-top:10px;text-align:left;font-size:12px;color:#ddd;display:grid;gap:6px}.kl div{display:flex;gap:7px;align-items:flex-start}.kl i{flex:none;width:18px;height:18px;border-radius:50%;background:#ffd23f;color:#000;font-style:normal;font-weight:800;font-size:11px;display:flex;align-items:center;justify-content:center}
+@media print{body{background:#fff;color:#000}.langs,.stage,.info,.pr,h1{display:none}.qr{box-shadow:none;margin-top:40px}.qr p{color:#333}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1 id="ttl"></h1>
+<div class="langs" id="langs"></div>
+<div class="stage" id="stg">
+  <div class="bars" id="bars"></div>
+  <div class="ic" id="ic"></div>
+  <div class="n" id="n"></div>
+  <div class="t" id="t"></div>
+  <div id="items"></div>
+  <div class="ctl">
+    <button id="prev" aria-label="prev">⏮</button>
+    <button id="play" class="play" aria-label="play">▶️</button>
+    <button id="next" aria-label="next">⏭</button>
+  </div>
+</div>
+<div class="info" id="info"></div>
+<div class="qr">
+  <h2 id="qt"></h2>
+  <p id="qd"></p>
+  <div id="qr"></div><br>
+  <button class="pr" id="pr" onclick="window.print()"></button>
+</div>
+</div>
+<script>
+// ✏️ 매장 정보 / Property info
+var CFG={phone:"070-4465-1051",tel:"07044651051",checkin:"17:00",checkout:"12:00",wifi:true};
+var STEP_MS=18000;
+var ICONS=["💳","💵","🚶","🔑","🔓","👋","⏰","💡","📺","🚭"];
+var CH=[0,0,1,1,1,2,2,3,3,3];
+// 패널 그림 [종류 k=정산기 w=벽 패널 h=HDMI, 강조 버튼, 누르면 안 되는 버튼]
+var PN={0:["f"],1:["c"],2:["q","out"],3:["q","key"],4:["r"],5:["q","bye"],7:["i"],8:["h",[0,1]]};
+var PSVG='<svg viewBox="0 0 340 300" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" font-weight="700"><ellipse cx="170" cy="295" rx="150" ry="4" fill="#000" opacity=".15"/><circle cx="72" cy="62" r="58" fill="#ffd23f" opacity=".35"/><g fill="#ffb800"><path transform="translate(22 24)" d="M0-8L2.5-2.5L8 0L2.5 2.5L0 8L-2.5 2.5L-8 0L-2.5-2.5Z"/><path transform="translate(122 46)" d="M0-8L2.5-2.5L8 0L2.5 2.5L0 8L-2.5 2.5L-8 0L-2.5-2.5Z"/><path transform="translate(16 104) scale(.8)" d="M0-8L2.5-2.5L8 0L2.5 2.5L0 8L-2.5 2.5L-8 0L-2.5-2.5Z"/></g><rect x="20" y="92" width="104" height="172" rx="22" fill="#fff" stroke="#1b2240" stroke-width="3"/><rect x="32" y="44" width="80" height="96" rx="8" fill="#fff" stroke="#1b2240" stroke-width="2.5"/><rect x="38" y="50" width="46" height="84" rx="4" fill="#e7efff"/><text transform="translate(52 96) rotate(-90)" font-size="11" text-anchor="middle" fill="#2b3a8c">HOTEL</text><rect x="62" y="48" width="16" height="84" rx="4" fill="#dfe3ee" stroke="#1b2240" stroke-width="2.5"/><rect x="78" y="86" width="9" height="9" rx="1.5" fill="#dfe3ee" stroke="#1b2240" stroke-width="2"/><rect x="78" y="101" width="9" height="9" rx="1.5" fill="#dfe3ee" stroke="#1b2240" stroke-width="2"/><rect x="78" y="116" width="9" height="9" rx="1.5" fill="#dfe3ee" stroke="#1b2240" stroke-width="2"/><rect x="48" y="10" width="44" height="42" rx="12" fill="#e9ecf4" stroke="#1b2240" stroke-width="3"/><circle cx="70" cy="26" r="6" fill="#fff" stroke="#1b2240" stroke-width="2.5"/><path d="M92 14 a9 9 0 1 1 12 6" fill="none" stroke="#9aa3bd" stroke-width="3"/><circle cx="50" cy="166" r="4.5" fill="#1b2240"/><circle cx="90" cy="166" r="4.5" fill="#1b2240"/><ellipse cx="41" cy="177" rx="6" ry="3.5" fill="#ff9db8"/><ellipse cx="99" cy="177" rx="6" ry="3.5" fill="#ff9db8"/><ellipse cx="70" cy="214" rx="40" ry="24" fill="#1b2240"/><text x="70" y="211" font-size="8.5" text-anchor="middle" fill="#fff">키를 넣어주세요</text><text x="70" y="221" font-size="7.5" text-anchor="middle" fill="#cdd4f0">INSERT KEY</text><polygon points="64,228 76,228 70,236" fill="#fff"/><rect x="14" y="268" width="112" height="24" rx="12" fill="#ffd23f" stroke="#1b2240" stroke-width="2.5"/><text x="70" y="285" font-size="12" text-anchor="middle" fill="#1b2240">열쇠 KEY</text><rect x="166" y="22" width="162" height="250" rx="20" fill="#fff" stroke="#1b2240" stroke-width="3"/><rect x="174" y="30" width="146" height="234" rx="14" fill="#15151c"/><text x="247" y="54" font-size="11" text-anchor="middle" fill="#e5e5ee">FreePlus one</text><rect x="196" y="70" width="98" height="46" rx="9" fill="#2a0f18" stroke="#ff4f6d" stroke-width="2.5"/><text x="245" y="102" font-size="22" text-anchor="middle" fill="#ff4f6d">외출</text><rect x="196" y="130" width="98" height="46" rx="9" fill="#101a33" stroke="#5b8cff" stroke-width="2.5"/><text x="245" y="162" font-size="22" text-anchor="middle" fill="#7aa2ff">퇴실</text><rect x="196" y="190" width="98" height="46" rx="9" fill="#2a0f18" stroke="#ff4f6d" stroke-width="2.5"/><text x="245" y="222" font-size="22" text-anchor="middle" fill="#ff4f6d">취소</text><text x="247" y="254" font-size="10" text-anchor="middle" fill="#fff">Check SW</text></svg>';
+var PS2=PSVG.replace('viewBox="0 0 340 300"','viewBox="160 16 174 266"');
+var FSVG='<svg viewBox="0 0 320 400" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" font-weight="700"><ellipse cx="170" cy="392" rx="120" ry="6" fill="#000" opacity=".18"/><rect x="84" y="8" width="204" height="378" rx="28" fill="#f6f8fc" stroke="#1b2240" stroke-width="4"/><rect x="96" y="22" width="180" height="222" rx="16" fill="#1b2240"/><rect x="102" y="28" width="168" height="210" rx="11" fill="#fff"/><text x="112" y="52" font-size="15" fill="#1b2240">셀프 체크인</text><rect x="110" y="62" width="152" height="54" rx="11" fill="#ff5fa8"/><text x="120" y="86" font-size="15" fill="#fff">예약 확인</text><rect x="120" y="96" width="44" height="12" rx="6" fill="#fff"/><text x="142" y="105" font-size="7" text-anchor="middle" fill="#ff5fa8">예약 고객</text><rect x="228" y="74" width="24" height="24" rx="5" fill="#fff"/><rect x="228" y="74" width="24" height="8" rx="4" fill="#ffb3d6"/><path d="M234 90 l4 4 l8 -8" fill="none" stroke="#ff5fa8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><rect x="110" y="124" width="73" height="58" rx="11" fill="#ffe27a"/><text x="120" y="147" font-size="15" fill="#1b2240">대실</text><circle cx="164" cy="166" r="9" fill="#fff" stroke="#1b2240" stroke-width="1.5"/><path d="M164 160 v6 l4 3" fill="none" stroke="#1b2240" stroke-width="1.5" stroke-linecap="round"/><rect x="189" y="124" width="73" height="58" rx="11" fill="#a9a8ff"/><text x="199" y="147" font-size="15" fill="#1b2240">숙박</text><circle cx="243" cy="166" r="9" fill="#fff"/><circle cx="247" cy="163" r="8" fill="#a9a8ff"/><rect x="110" y="204" width="50" height="16" rx="8" fill="#eef1f7"/><circle cx="119" cy="212" r="3" fill="#3b82f6"/><text x="124" y="215" font-size="7.5" fill="#1b2240">English</text><rect x="165" y="204" width="40" height="16" rx="8" fill="#eef1f7"/><circle cx="173" cy="212" r="3" fill="#ef4444"/><text x="178" y="215" font-size="7.5" fill="#1b2240">中文</text><rect x="210" y="204" width="52" height="16" rx="8" fill="#eef1f7"/><circle cx="218" cy="212" r="3" fill="#ef4444"/><text x="223" y="215" font-size="7.5" fill="#1b2240">日本語</text><rect x="104" y="256" width="74" height="58" rx="8" fill="#eef1f7" stroke="#1b2240" stroke-width="2.5"/><rect x="112" y="266" width="58" height="6" rx="3" fill="#1b2240"/><rect x="119" y="270" width="44" height="30" rx="2" fill="#fff" stroke="#1b2240" stroke-width="1.5"/><text x="141" y="289" font-size="10" text-anchor="middle" fill="#ff5fa8">206호</text><text x="141" y="309" font-size="8" text-anchor="middle" fill="#1b2240">영수증</text><rect x="186" y="256" width="84" height="56" rx="10" fill="#2b3558" stroke="#1b2240" stroke-width="2.5"/><rect x="196" y="264" width="64" height="34" rx="6" fill="#161c36"/><text x="228" y="306" font-size="6.5" text-anchor="middle" fill="#cdd4f0">ID</text><rect x="186" y="318" width="84" height="40" rx="10" fill="#eef1f7" stroke="#1b2240" stroke-width="2.5"/><text x="228" y="331" font-size="8" text-anchor="middle" fill="#1b2240">카드 CARD</text><rect x="198" y="338" width="60" height="9" rx="4.5" fill="#1b2240"/><rect x="224" y="333" width="28" height="17" rx="3" fill="#7cc4ff" stroke="#1b2240" stroke-width="1.5" transform="rotate(-12 238 341)"/><g fill="#cfd6e6"><rect x="112" y="326" width="58" height="4" rx="2"/><rect x="112" y="336" width="58" height="4" rx="2"/><rect x="112" y="346" width="58" height="4" rx="2"/></g><rect x="8" y="228" width="66" height="22" rx="11" fill="#8b5cf6" stroke="#1b2240" stroke-width="2.5"/><polygon points="32,249 46,249 39,258" fill="#8b5cf6"/><text x="41" y="243" font-size="11" text-anchor="middle" fill="#fff">호출벨</text><rect x="14" y="262" width="50" height="96" rx="14" fill="#fff" stroke="#1b2240" stroke-width="3"/><rect x="14" y="262" width="50" height="66" rx="14" fill="#8b5cf6" stroke="#1b2240" stroke-width="3"/><circle cx="39" cy="290" r="13" fill="#c4b5fd" stroke="#fff" stroke-width="3"/><circle cx="39" cy="290" r="6" fill="#8b5cf6"/><g fill="none" stroke="#fff" stroke-width="1.5"><circle cx="23" cy="314" r="2.5"/><circle cx="33" cy="314" r="2.5"/><circle cx="43" cy="314" r="2.5"/><circle cx="53" cy="314" r="2.5"/></g><rect x="24" y="340" width="30" height="6" rx="3" fill="#1b2240"/><path d="M68 282 q6 8 0 16" stroke="#8b5cf6" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M74 276 q9 14 0 28" stroke="#8b5cf6" stroke-width="3" fill="none" stroke-linecap="round"/></svg>';
+var CASHSVG='<svg viewBox="0 0 280 360" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" font-weight="700"><ellipse cx="140" cy="352" rx="100" ry="6" fill="#000" opacity=".18"/><rect x="20" y="8" width="240" height="340" rx="36" fill="#34406b" stroke="#1b2240" stroke-width="4"/><rect x="30" y="16" width="220" height="12" rx="6" fill="#4a5890" opacity=".7"/><rect x="38" y="32" width="204" height="108" rx="16" fill="#1d2442" stroke="#ff9f5a" stroke-width="3"/><rect x="50" y="44" width="86" height="62" rx="10" fill="#c4eeaa" stroke="#1b2240" stroke-width="3"/><circle cx="80" cy="64" r="4.5" fill="#1b2240"/><circle cx="106" cy="64" r="4.5" fill="#1b2240"/><ellipse cx="70" cy="75" rx="6" ry="3.5" fill="#ff9db8"/><ellipse cx="116" cy="75" rx="6" ry="3.5" fill="#ff9db8"/><path d="M85 74 Q93 84 101 74" fill="none" stroke="#1b2240" stroke-width="3" stroke-linecap="round"/><text x="93" y="99" font-size="11" text-anchor="middle" fill="#1b2240">206호</text><text x="93" y="122" font-size="8" text-anchor="middle" fill="#ff9f5a">무인정산시스템</text><g stroke="#ff4f93" stroke-width="2.5" fill="#3a1030"><rect x="158" y="40" width="76" height="28" rx="14"/><rect x="158" y="72" width="76" height="28" rx="14"/><rect x="158" y="104" width="76" height="28" rx="14"/></g><g fill="#ff5c9a" text-anchor="middle"><text x="196" y="55" font-size="12">대실</text><text x="196" y="64" font-size="6.5">Rest Time</text><text x="196" y="87" font-size="12">숙박</text><text x="196" y="96" font-size="6.5">Accommodate</text><text x="196" y="119" font-size="10">외출복귀</text><text x="196" y="128" font-size="6.5">Return room</text></g><rect x="70" y="148" width="140" height="19" rx="9.5" fill="#fff" stroke="#1b2240" stroke-width="2"/><text x="140" y="161" font-size="9.5" text-anchor="middle" fill="#1b2240">거스름돈 나오는곳</text><rect x="34" y="176" width="212" height="132" rx="24" fill="#fffaf0" stroke="#1b2240" stroke-width="3"/><rect x="94" y="178" width="92" height="22" rx="11" fill="#ffe9a8" stroke="#1b2240" stroke-width="2.5"/><circle cx="124" cy="189" r="5.5" fill="#ffd23f" stroke="#b88a00" stroke-width="1.5"/><circle cx="140" cy="191" r="5.5" fill="#ffd23f" stroke="#b88a00" stroke-width="1.5"/><circle cx="155" cy="188" r="5.5" fill="#ffd23f" stroke="#b88a00" stroke-width="1.5"/><rect x="82" y="214" width="116" height="17" rx="8.5" fill="#fff" stroke="#1b2240" stroke-width="2"/><text x="140" y="226.5" font-size="9.5" text-anchor="middle" fill="#1b2240">지폐투입구</text><g transform="rotate(-5 140 244)"><rect x="118" y="230" width="46" height="22" rx="3" fill="#8fdc9e" stroke="#2f8f4e" stroke-width="2"/><circle cx="141" cy="241" r="6" fill="#c9f2d1" stroke="#2f8f4e" stroke-width="1.5"/><text x="141" y="244" font-size="7" text-anchor="middle" fill="#2f8f4e">₩</text></g><rect x="90" y="246" width="100" height="14" rx="7" fill="#1b2240"/><rect x="56" y="270" width="168" height="30" rx="7" fill="#fff" stroke="#3b5bdb" stroke-width="2"/><rect x="56" y="270" width="168" height="10" rx="5" fill="#3b5bdb"/><rect x="66" y="286" width="148" height="3" rx="1.5" fill="#cfd4e6"/><rect x="66" y="292" width="110" height="3" rx="1.5" fill="#cfd4e6"/><rect x="56" y="312" width="168" height="30" rx="14" fill="#232b4d" stroke="#1b2240" stroke-width="3"/><rect x="104" y="318" width="72" height="18" rx="6" fill="#fff"/><text x="140" y="331" font-size="10" text-anchor="middle" fill="#2b3a8c">HOTEL</text><circle cx="238" cy="214" r="7" fill="#d5dbea" stroke="#1b2240" stroke-width="2"/><rect x="236.5" y="209" width="3" height="6" rx="1.5" fill="#1b2240"/></svg>';
+var SWSVG='<svg viewBox="0 0 260 400" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" font-weight="700"><ellipse cx="130" cy="394" rx="110" ry="5" fill="#000" opacity=".15"/><rect x="10" y="6" width="240" height="380" rx="28" fill="#fff" stroke="#1b2240" stroke-width="4"/><rect x="20" y="16" width="220" height="360" rx="20" fill="#0f1326"/><text x="130" y="46" font-size="12" text-anchor="middle" fill="#dfe3f2">FreePlus one</text><g transform="translate(130 94)"><circle r="33" fill="#3d7bff" opacity=".22"/><g stroke="#5b9bff" stroke-width="3" stroke-linecap="round"><line x1="0" y1="-23" x2="0" y2="-30"/><line x1="16.3" y1="-16.3" x2="21.2" y2="-21.2"/><line x1="23" y1="0" x2="30" y2="0"/><line x1="16.3" y1="16.3" x2="21.2" y2="21.2"/><line x1="0" y1="23" x2="0" y2="30"/><line x1="-16.3" y1="16.3" x2="-21.2" y2="21.2"/><line x1="-23" y1="0" x2="-30" y2="0"/><line x1="-16.3" y1="-16.3" x2="-21.2" y2="-21.2"/></g><circle r="17" fill="#13265a" stroke="#4d8dff" stroke-width="3.5"/></g><text x="130" y="100" font-size="15" text-anchor="middle" fill="#cfe0ff">M</text><text x="130" y="138" font-size="11" text-anchor="middle" fill="#d5dbf0">MAIN LAMP</text><g transform="translate(58 174)"><circle r="33" fill="#3d7bff" opacity=".22"/><g stroke="#5b9bff" stroke-width="3" stroke-linecap="round"><line x1="0" y1="-23" x2="0" y2="-30"/><line x1="16.3" y1="-16.3" x2="21.2" y2="-21.2"/><line x1="23" y1="0" x2="30" y2="0"/><line x1="16.3" y1="16.3" x2="21.2" y2="21.2"/><line x1="0" y1="23" x2="0" y2="30"/><line x1="-16.3" y1="16.3" x2="-21.2" y2="21.2"/><line x1="-23" y1="0" x2="-30" y2="0"/><line x1="-16.3" y1="-16.3" x2="-21.2" y2="-21.2"/></g><circle r="17" fill="#13265a" stroke="#4d8dff" stroke-width="3.5"/></g><text x="58" y="180" font-size="15" text-anchor="middle" fill="#cfe0ff">1</text><text x="58" y="218" font-size="11" text-anchor="middle" fill="#d5dbf0">LAMP 1</text><g transform="translate(202 174)"><circle r="33" fill="#3d7bff" opacity=".22"/><g stroke="#5b9bff" stroke-width="3" stroke-linecap="round"><line x1="0" y1="-23" x2="0" y2="-30"/><line x1="16.3" y1="-16.3" x2="21.2" y2="-21.2"/><line x1="23" y1="0" x2="30" y2="0"/><line x1="16.3" y1="16.3" x2="21.2" y2="21.2"/><line x1="0" y1="23" x2="0" y2="30"/><line x1="-16.3" y1="16.3" x2="-21.2" y2="21.2"/><line x1="-23" y1="0" x2="-30" y2="0"/><line x1="-16.3" y1="-16.3" x2="-21.2" y2="-21.2"/></g><circle r="17" fill="#13265a" stroke="#4d8dff" stroke-width="3.5"/></g><text x="202" y="180" font-size="15" text-anchor="middle" fill="#cfe0ff">2</text><text x="202" y="218" font-size="11" text-anchor="middle" fill="#d5dbf0">LAMP 2</text><circle cx="130" cy="204" r="30" fill="#3d7bff" opacity=".18"/><circle cx="130" cy="204" r="23" fill="#13265a" stroke="#4d8dff" stroke-width="3.5"/><text x="130" y="210" font-size="16" text-anchor="middle" fill="#8fb8ff">OFF</text><text x="130" y="248" font-size="11" text-anchor="middle" fill="#d5dbf0">ALL OFF</text><g transform="translate(58 264)"><circle r="33" fill="#3d7bff" opacity=".22"/><g stroke="#5b9bff" stroke-width="3" stroke-linecap="round"><line x1="0" y1="-23" x2="0" y2="-30"/><line x1="16.3" y1="-16.3" x2="21.2" y2="-21.2"/><line x1="23" y1="0" x2="30" y2="0"/><line x1="16.3" y1="16.3" x2="21.2" y2="21.2"/><line x1="0" y1="23" x2="0" y2="30"/><line x1="-16.3" y1="16.3" x2="-21.2" y2="21.2"/><line x1="-23" y1="0" x2="-30" y2="0"/><line x1="-16.3" y1="-16.3" x2="-21.2" y2="-21.2"/></g><circle r="17" fill="#13265a" stroke="#4d8dff" stroke-width="3.5"/></g><text x="58" y="270" font-size="15" text-anchor="middle" fill="#cfe0ff">3</text><text x="58" y="308" font-size="11" text-anchor="middle" fill="#d5dbf0">LAMP 3</text><g transform="translate(202 264)"><circle r="33" fill="#3d7bff" opacity=".22"/><g stroke="#5b9bff" stroke-width="3" stroke-linecap="round"><line x1="0" y1="-23" x2="0" y2="-30"/><line x1="16.3" y1="-16.3" x2="21.2" y2="-21.2"/><line x1="23" y1="0" x2="30" y2="0"/><line x1="16.3" y1="16.3" x2="21.2" y2="21.2"/><line x1="0" y1="23" x2="0" y2="30"/><line x1="-16.3" y1="16.3" x2="-21.2" y2="21.2"/><line x1="-23" y1="0" x2="-30" y2="0"/><line x1="-16.3" y1="-16.3" x2="-21.2" y2="-21.2"/></g><circle r="17" fill="#13265a" stroke="#4d8dff" stroke-width="3.5"/></g><text x="202" y="270" font-size="15" text-anchor="middle" fill="#cfe0ff">4</text><text x="202" y="308" font-size="11" text-anchor="middle" fill="#d5dbf0">LAMP 4</text><g transform="translate(130 322) rotate(-28)"><rect x="-6" y="-26" width="12" height="32" rx="6" fill="#7b93ff"/><ellipse cx="0" cy="8" rx="15" ry="7.5" fill="#a3b5ff"/></g><g fill="#7fb0ff"><ellipse cx="124" cy="342" rx="2" ry="3.5"/><ellipse cx="133" cy="346" rx="2" ry="3.5"/><ellipse cx="142" cy="341" rx="2" ry="3.5"/></g><text x="130" y="366" font-size="11" text-anchor="middle" fill="#d5dbf0">BATH ROOM</text></svg>';
+var SWN=["MAIN LAMP","LAMP 1","LAMP 2","LAMP 3","LAMP 4","ALL OFF","BATH ROOM"];
+var KO_K=["대실","숙박","외출복귀"],KO_W=["외출","퇴실","취소"];
+var L={
+ko:{n:"한국어",ttl:"호텔 이용 가이드",ch:["체크인","외출·복귀","퇴실","객실 안내"],cap:["정산기","객실 입구 벽 패널","리모컨 [외부입력] 후 선택","입구 옆 벽 스위치 · 침대 옆 스위치","출입문 옆 패널과 열쇠 보관함","1층 프런트 키오스크"],QL:["'외출': 나가기 전에 누르세요","'퇴실': 마지막으로 나갈 때만 누르세요 (외출할 때는 누르지 마세요)","'취소': 잘못 눌렀을 때"],QK:"열쇠가 중요해요! 장시간 외출할 때는 이 열쇠로 문을 잠그세요. 잠그면 '외출복귀' 버튼으로 열리지 않아 안전해요.",KR:"정산기의 '외출복귀' 버튼을 누르세요",KF:["화면 아래에서 언어를 고르세요 (English · 中文 · 日本語)","예약하셨다면 '예약 확인', 아니면 '대실' · '숙박'을 누르세요","카드는 여기에서 결제하세요","영수증에서 객실 호수를 확인하세요","보라색 '호출벨'을 누르면 확인 후 객실을 열어 드려요"],K:["","",""],W:["","",""],KL:["'대실'(3시간) 또는 '숙박'(17시부터) 버튼을 누르세요","지폐 투입구에 1만원권을 한 장씩 천천히 넣으세요","거스름돈이 나오는 곳"],H:["일반 TV","OTT"],Lm:["메인 조명","조명 1","조명 2","조명 3","조명 4","전체 끄기","욕실"],
+ s:[["카드 결제 · 예약 확인","1층 프런트 키오스크에서 진행해요. 예약하셨다면(야놀자, 여기어때 등) '예약 확인'을, 현장 결제는 '대실' 또는 '숙박'을 눌러 카드로 결제하세요. 영수증의 객실 호수를 확인하고 그 방으로 가세요.","객실 카드(카드키)는 없어요. 호출벨을 누르거나 070-4465-1051로 전화하시면 확인 후 객실을 열어 드려요."],
+ ["현금으로 입실","비어 있는 객실의 주차장에 주차하세요. 계단 중간 정산기에서 '대실'(3시간) 또는 '숙박'(17시부터)을 누르고, 1만원권을 한 장씩 천천히 넣으면 문이 자동으로 열려요. 거스름돈은 아래로 나와요."],
+ ["외출할 때는","객실 입구 벽의 패널에서 '외출' 버튼을 누르고 나가세요. 문을 닫으면 자동으로 잠겨요.","외출할 때는 '퇴실' 버튼을 누르지 마세요!"],
+ ["장시간 외출할 때는","출입문 옆에 걸린 열쇠로 문을 잠그고 나가세요. 이렇게 잠그면 '외출복귀' 버튼을 눌러도 문이 열리지 않아 보안 걱정이 없어요. 돌아오면 같은 열쇠로 여세요."],
+ ["외출 후 돌아오면","객실 문 앞 정산기의 '외출복귀' 버튼을 누르면 문이 열려요."],
+ ["퇴실할 때는","퇴실 시간은 낮 12시까지예요. 최종 퇴실할 때만 패널의 '퇴실' 버튼을 눌러 주세요.","잠깐 외출할 때는 누르면 안 돼요."],
+ ["퇴실 연장","시간당 10,000원이에요. 먼저 전화로 문의해 주세요. 입금 계좌: 하나은행 211-910773-66907 (예금주 황인찬)"],
+ ["조명 켜는 법","입구 옆 벽 스위치와 침대 옆 스위치로 원하는 대로 조명을 조절하세요. 'ALL OFF'를 누르면 모든 조명이 꺼져요."],
+ ["TV 보는 법","리모컨의 '외부입력' 버튼을 누른 뒤, 일반 TV는 HDMI 1, OTT(스트리밍)는 HDMI 2를 선택하세요."],
+ ["금연 안내","모든 객실과 건물 안은 금연이에요(전자담배 포함). 적발 시 특수 청소비 200,000원이 부과될 수 있어요."]],
+ info:["📞 문의","🕚 퇴실 시간","📶 Wi-Fi 무료 이용 가능","⏳ 대실 3시간 이용","🌙 숙박 입실 시간","➕ 연장 요금: 시간당 10,000원","🔞 미성년자 출입 금지"],qt:"QR로 가이드 다시 보기",qd:"카메라로 스캔하면 이 안내를 볼 수 있어요.",pr:"QR 인쇄하기"},
+en:{n:"English",ttl:"Hotel Guest Guide",ch:["CHECK-IN","OUT & BACK","CHECK-OUT","ROOM INFO"],cap:["Kiosk","Wall panel at the room entrance","After pressing [External Input] on the remote","Wall switch by the entrance · Bedside switch","Panel and key box next to the entrance door","Kiosk at the 1st-floor front desk"],QL:["'Out' (외출): press before you leave","'Check-out' (퇴실): only when you leave for good, not when going out","'Cancel' (취소): if you pressed by mistake"],QK:"The key matters! For a long time out, lock the door with this key. A key-locked door can't be opened with 'Return room', so it stays secure.",KR:"Press 'Return room' (외출복귀) on the kiosk at your door",KF:["Choose your language at the bottom of the screen (English · 中文 · 日本語)","Tap 'Reservation check' (예약 확인) if you booked, or 'Rest Time' (대실) / 'Overnight' (숙박)","Pay with your card here","Check your room number on the receipt","Press the purple call bell and we'll check and open your room"],K:["Rest Time","Accommodate","Return room"],W:["Out","Check-out","Cancel"],KL:["Press 'Rest Time' (3 h) or 'Accommodate' (overnight, from 5 PM)","Insert 10,000-won bills here, one at a time, slowly","Change comes out here"],H:["Regular TV","OTT"],Lm:["Main light","Light 1","Light 2","Light 3","Light 4","Turn all off","Bathroom"],
+ s:[["Card payment · Reservation check","Use the kiosk at the 1st-floor front desk. If you booked online (Yanolja, Yeogi-eottae, etc.), tap 'Reservation check'. Otherwise tap 'Rest Time' or 'Overnight' and pay by card. Check the room number on your receipt and go to that room.","There is no room key card. Press the call bell or call 070-4465-1051, and we will check and open your room."],
+ ["Check-in with cash","Park in an empty room's parking space. At the kiosk on the stairs, press 'Rest Time' (3 hours) or 'Accommodate' (overnight, from 5 PM), then insert 10,000-won bills one at a time. The door opens automatically. Change comes out below."],
+ ["Going out?","Press 'Out' (외출) on the wall panel at the room entrance, then leave. The door locks automatically when it closes.","Do NOT press 'Check-out' when going out!"],
+ ["Out for a long time?","Lock the door with the key hanging next to the entrance, then leave. When locked this way, pressing 'Return room' will not open the door, so your room stays secure. Use the same key to unlock when you return."],
+ ["Coming back","Press 'Return room' (외출복귀) on the kiosk at your room door. The door will open."],
+ ["Check out","Checkout is by 12:00 noon. Press 'Check-out' (퇴실) on the panel only when you are leaving for good.","Don't press it for a short trip out."],
+ ["Late check-out","10,000 KRW per hour. Please call first. Bank transfer: Hana Bank 211-910773-66907 (account holder: 황인찬)."],
+ ["Room lights","Control the lights as you like with the wall switch next to the entrance or the switch beside the bed. 'ALL OFF' turns every light off."],
+ ["TV & streaming","Press 'External Input' (외부입력) on the remote. Choose HDMI 1 for regular TV, HDMI 2 for streaming (OTT)."],
+ ["No smoking","All rooms and the whole building are non-smoking (e-cigarettes too). A special cleaning fee of 200,000 KRW may be charged."]],
+ info:["📞 Contact","🕚 Checkout","📶 Free Wi-Fi available","⏳ Short stay: 3 hours","🌙 Overnight check-in","➕ Extension: 10,000 KRW per hour","🔞 No minors allowed"],qt:"Scan to watch again",qd:"Scan with your phone camera to view this guide.",pr:"Print QR"},
+zh:{n:"中文",ttl:"酒店入住指南",ch:["入住","外出·返回","退房","房间须知"],cap:["结算机","房间入口墙上面板","按遥控器“外部输入”后选择","入口旁墙上开关 · 床边开关","入口门旁的面板和钥匙盒","1楼前台自助机"],QL:["“外出”(외출)：离开前按","“退房”(퇴실)：仅在最终离开时按，外出时不要按","“取消”(취소)：按错时按"],QK:"钥匙很重要！长时间外出请用此钥匙锁门。用钥匙锁上后，按“外出返回”也打不开，非常安全。",KR:"请按房门前结算机上的“外出返回”(외출복귀)按钮",KF:["在屏幕下方选择语言（English · 中文 · 日本語）","已预订请点“预订确认”(예약 확인)，否则点“钟点房”(대실)或“过夜”(숙박)","在这里刷卡付款","在小票上确认房号","按紫色“呼叫铃”，我们确认后为您开门"],K:["钟点房","过夜","外出返回"],W:["外出","退房","取消"],KL:["按“钟点房”（3小时）或“过夜”（17:00起）","在此逐张慢慢放入10,000韩元纸币","找零从这里出来"],H:["普通电视","OTT"],Lm:["主灯","灯1","灯2","灯3","灯4","全部关闭","浴室"],
+ s:[["刷卡付款 · 预订确认","请在1楼前台的自助机上操作。已在线预订（Yanolja、Yeogi-eottae 等）请点“预订确认”；现场付款请点“钟点房”或“过夜”并刷卡。确认小票上的房号后，前往该房间。","没有房卡。请按呼叫铃或拨打070-4465-1051，我们确认后会为您开门。"],
+ ["现金入住","请把车停在空房间的车位。在楼梯中间的结算机上按“钟点房”（3小时）或“过夜”（17:00起），再把10,000韩元纸币逐张慢慢放入，门会自动打开。找零从下方出口出来。"],
+ ["外出时","请按房间入口墙上面板的“外出”(외출)按钮再离开。关门后会自动上锁。","外出时不要按“退房”按钮！"],
+ ["长时间外出时","请用入口旁挂着的钥匙锁好门再离开。这样锁门后，即使按“外出返回”按钮门也不会打开，非常安全。回来时用同一把钥匙开门。"],
+ ["外出回来后","请按房门前结算机上的“外出返回”(외출복귀)按钮，门就会打开。"],
+ ["退房时","退房时间为中午12点前。只有最终离开时，才按面板上的“退房”(퇴실)按钮。","临时外出时不要按。"],
+ ["延迟退房","每小时10,000韩元，请先打电话咨询。转账账户：Hana Bank 211-910773-66907（户名：황인찬）"],
+ ["房间灯光","可用入口旁墙上的开关或床边的开关随意调节灯光。按“ALL OFF”可关闭所有灯。"],
+ ["电视使用方法","按遥控器上的“外部输入”(외부입력)，普通电视选 HDMI 1，流媒体（OTT）选 HDMI 2。"],
+ ["禁烟","所有房间和整栋建筑内禁烟（含电子烟）。被发现可能收取200,000韩元特别清洁费。"]],
+ info:["📞 联系电话","🕚 退房时间","📶 提供免费Wi-Fi","⏳ 钟点房 3小时","🌙 过夜入住时间","➕ 延时费：每小时10,000韩元","🔞 禁止未成年人入内"],qt:"扫码再次观看",qd:"用手机相机扫描即可查看本指南。",pr:"打印二维码"},
+ja:{n:"日本語",ttl:"ホテルご利用ガイド",ch:["チェックイン","外出・復帰","チェックアウト","お部屋の案内"],cap:["精算機","部屋の入口の壁パネル","リモコンの「外部入力」のあとで選択","入口横の壁スイッチ・ベッド横スイッチ","出入口横のパネルと鍵ボックス","1階フロントのキオスク"],QL:["「外出」(외출)：出る前に押す","「退室」(퇴실)：完全に退室するときだけ。外出時は押さない","「キャンセル」(취소)：間違えて押したとき"],QK:"鍵は大切です！長時間外出するときはこの鍵でドアを施錠してください。施錠すると「外出復帰」では開かないので安全です。",KR:"ドア前の精算機の「外出復帰」(외출복귀)ボタンを押す",KF:["画面の下で言語を選ぶ（English · 中文 · 日本語）","予約済みは「予約確認」(예약 확인)、そうでなければ「休憩」(대실)か「宿泊」(숙박)を押す","ここでカード決済","レシートで部屋番号を確認","紫色の「呼び出しベル」を押すと、確認後にお部屋を開けます"],K:["休憩","宿泊","外出から戻る"],W:["外出","退室","キャンセル"],KL:["「休憩」（3時間）か「宿泊」（17時から）を押す","ここに1万ウォン札を1枚ずつゆっくり入れる","お釣りはここに出ます"],H:["通常のテレビ","OTT"],Lm:["メイン照明","照明1","照明2","照明3","照明4","すべて消灯","バスルーム"],
+ s:[["カード決済・予約確認","1階フロントのキオスクで行います。予約済み（Yanolja、Yeogi-eottae など）の方は「予約確認」、当日払いの方は「休憩」か「宿泊」を押してカードで支払ってください。レシートの部屋番号を確認して、その部屋へ。","ルームカードはありません。呼び出しベルを押すか070-4465-1051へお電話ください。確認後、お部屋を開けます。"],
+ ["現金でチェックイン","空いている部屋の駐車スペースに停めてください。階段途中の精算機で「休憩」（3時間）か「宿泊」（17時から）を押し、1万ウォン札を1枚ずつゆっくり入れるとドアが自動で開きます。お釣りは下に出ます。"],
+ ["外出するとき","部屋の入口の壁パネルの「外出」(외출)ボタンを押して出てください。ドアを閉めると自動で施錠されます。","外出のときは「退室」を押さないでください！"],
+ ["長時間外出するとき","入口横にかかっている鍵でドアを施錠してから出てください。この方法で施錠すると「外出復帰」ボタンを押してもドアは開かないので、セキュリティも安心です。戻ったら同じ鍵で開けてください。"],
+ ["外出から戻ったら","部屋のドア前の精算機の「外出復帰」(외출복귀)ボタンを押すとドアが開きます。"],
+ ["チェックアウト","退室時間は正午12時までです。完全に退室するときだけ、パネルの「退室」(퇴실)ボタンを押してください。","ちょっと外出するときは押さないでください。"],
+ ["レイトチェックアウト","1時間10,000ウォン。先に電話でお問い合わせください。振込先：ハナ銀行 211-910773-66907（名義：황인찬）"],
+ ["お部屋の照明","入口横の壁スイッチとベッド横のスイッチで、お好みに合わせて照明を調整できます。「ALL OFF」で全部消灯します。"],
+ ["テレビの見方","リモコンの「外部入力」(외부입력)を押し、通常のテレビはHDMI 1、動画配信(OTT)はHDMI 2を選びます。"],
+ ["禁煙","全室・建物内すべて禁煙です（電子タバコも）。発覚時は特別清掃費200,000ウォンが請求されることがあります。"]],
+ info:["📞 お問い合わせ","🕚 チェックアウト","📶 無料Wi-Fiあり","⏳ 休憩 3時間","🌙 宿泊チェックイン","➕ 延長：1時間10,000ウォン","🔞 未成年者の入室禁止"],qt:"QRでもう一度見る",qd:"スマホのカメラで読み取るとこのガイドが見られます。",pr:"QRを印刷"}
+};
+var lang="ko",cur=0,tick=0,playing=false,NP=4,PI=["🚪","🚶","👋","🛏️"],$=function(i){return document.getElementById(i)};
+var nav=(navigator.language||"ko").slice(0,2);if(L[nav])lang=nav;
+function vis(i,T){
+  var pn=PN[i];if(!pn)return "";
+  if(pn[0]==="i"){var g="";for(var j=0;j<7;j++)g+="<div><b>"+SWN[j]+"</b> "+T.Lm[j]+"</div>";return '<div class="pnl i"><div class="cap">'+T.cap[3]+'</div><div class="kimg s">'+SWSVG+'</div><div class="lg">'+g+'</div></div>'}
+  if(pn[0]==="c"){
+    var M=[[52.9,19.4,"1"],[26,68.5,"2"],[21.5,48.5,"3"]],R=[[55.7,10,28.6,19],[30.7,63.9,38.6,8.3],[25,41.1,50,15]],m="",g="",l="";
+    for(var j=0;j<3;j++){m+='<span class="rg" style="left:'+R[j][0]+'%;top:'+R[j][1]+'%;width:'+R[j][2]+'%;height:'+R[j][3]+'%"></span><span class="mk" style="left:'+M[j][0]+'%;top:'+M[j][1]+'%">'+M[j][2]+'</span>';l+='<div><i>'+M[j][2]+'</i><span>'+T.KL[j]+'</span></div>'}
+    return '<div class="pnl c"><div class="cap">'+T.cap[0]+'</div><div class="kimg">'+CASHSVG+''+m+'</div><div class="kl">'+l+'</div></div>';
+  }
+  if(pn[0]==="f"){
+    var M=[[30,53,"1"],[30,30,"2"],[87.5,85,"3"],[31.25,72.5,"4"]],R=[[33.75,50.5,48.75,5],[33.75,15,48.75,31],[57.5,79.5,27.5,10.5],[35.6,66.5,16.9,11.5]],m="",l="";
+    for(var j=0;j<4;j++){m+='<span class="rg" style="left:'+R[j][0]+'%;top:'+R[j][1]+'%;width:'+R[j][2]+'%;height:'+R[j][3]+'%"></span><span class="mk" style="left:'+M[j][0]+'%;top:'+M[j][1]+'%">'+M[j][2]+'</span>';l+='<div><i>'+M[j][2]+'</i><span>'+T.KF[j]+'</span></div>'}
+    m+='<span class="rg b" style="left:.6%;top:56.5%;width:23.8%;height:35%"></span><span class="mk b" style="left:12.2%;top:50.5%">🔔</span>';
+    l+='<div class="bl"><i>🔔</i><span>'+T.KF[4]+'</span></div>';
+    return '<div class="pnl c"><div class="cap">'+T.cap[5]+'</div><div class="kimg">'+FSVG+m+'</div><div class="kl">'+l+'</div></div>';
+  }
+  if(pn[0]==="q"){
+    var md=pn[1],m="",l="",g=function(a,b,c,d,k){return '<span class="rg'+(k?' '+k:'')+'" style="left:'+a+'%;top:'+b+'%;width:'+c+'%;height:'+d+'%"></span>'};
+    if(md==="out"){m=g(19.5,19.5,58.6,18.8)+'<span class="mk" style="left:16.1%;top:28.9%">1</span>'+g(19.5,42.1,58.6,18.8,"x")+'<span class="mk x" style="left:79%;top:43%">✖</span>';l='<div><i>1</i><span>'+T.QL[0]+'</span></div><div class="no"><i>✖</i><span>'+T.QL[1]+'</span></div>'}
+    if(md==="bye"){m=g(19.5,42.1,58.6,18.8)+'<span class="mk" style="left:16.1%;top:51.5%">1</span>'+g(19.5,64.7,58.6,18.8)+'<span class="mk" style="left:16.1%;top:74.1%">2</span>';l='<div><i>1</i><span>'+T.QL[1]+'</span></div><div><i>2</i><span>'+T.QL[2]+'</span></div>'}
+    if(md==="key"){m=g(11.8,1.3,18.8,45.3,"k")+'<span class="mk k" style="left:32.4%;top:4.7%">🔑</span>';l='<div class="kg"><i>🔑</i><span>'+T.QK+'</span></div>'}
+    return '<div class="pnl c"><div class="cap">'+T.cap[md!=="key"?1:4]+'</div><div class="kimg '+(md!=="key"?"n":"w")+'">'+(md!=="key"?PS2:PSVG)+m+'</div><div class="kl">'+l+'</div></div>';
+  }
+  if(pn[0]==="r"){
+    return '<div class="pnl c"><div class="cap">'+T.cap[0]+'</div><div class="kimg">'+CASHSVG+'<span class="rg" style="left:55.7%;top:28.3%;width:28.6%;height:8.9%"></span><span class="mk" style="left:53.6%;top:32.8%">1</span></div><div class="kl"><div><i>1</i><span>'+T.KR+'</span></div></div></div>';
+  }
+  if(pn[0]==="p")return '<div class="pnl i"><div class="cap">'+T.cap[4]+'</div><img alt="" src="'+KEYIMG+'"></div>';
+  var kd=pn[0],C={k:{nm:KO_K,sm:T.K,cl:["#ff2d78","#ff2d78","#ff2d78"],cp:T.cap[0]},w:{nm:KO_W,sm:T.W,cl:["#ff3b5c","#5b8cff","#ff3b5c"],cp:T.cap[1]},h:{nm:["HDMI 1","HDMI 2"],sm:T.H,cl:["#4aa3ff","#4aa3ff"],cp:T.cap[2]}}[kd];
+  var h='<div class="pnl '+kd+'"><div class="cap">'+C.cp+'</div><div class="row">';
+  for(var q=0;q<C.nm.length;q++)h+='<div class="pb'+(pn[1].indexOf(q)>-1?' hl':'')+((pn[2]||[]).indexOf(q)>-1?' no':'')+'" style="--c:'+C.cl[q]+'">'+C.nm[q]+(C.sm[q]?'<small>'+C.sm[q]+'</small>':'')+'</div>';
+  return h+'</div></div>';
+}
+function render(){
+  var T=L[lang];
+  document.documentElement.lang=lang;
+  $("ttl").textContent="🏨 "+T.ttl;
+  $("ic").textContent=PI[cur];$("n").textContent=(cur+1)+" / "+NP;$("t").textContent=T.ch[cur];
+  var h="";
+  T.s.forEach(function(s,i){
+    if(CH[i]!==cur)return;
+    h+='<div class="it"><div class="ih"><span class="ii">'+ICONS[i]+'</span><b>'+s[0]+'</b></div><p>'+s[1]+'</p>'+(s[2]?'<div class="warn">⚠️ '+s[2]+'</div>':'')+vis(i,T)+'</div>';
+  });
+  $("items").innerHTML=h;
+  var I=T.info,H="<div><b>"+I[0]+"</b> <a href='tel:"+CFG.tel+"'>"+CFG.phone+"</a></div><div><b>"+I[3]+"</b></div><div><b>"+I[4]+"</b> "+CFG.checkin+"</div><div><b>"+I[1]+"</b> "+CFG.checkout+"</div><div><b>"+I[5]+"</b></div>";
+  if(CFG.wifi)H+="<div><b>"+I[2]+"</b>"+(CFG.wifi===true?"":" "+CFG.wifi)+"</div>";
+  $("info").innerHTML=H+"<div><b>"+I[6]+"</b></div>";
+  $("qt").textContent=T.qt;$("qd").textContent=T.qd;$("pr").textContent=T.pr;
+  $("langs").innerHTML="";
+  Object.keys(L).forEach(function(k){var b=document.createElement("button");b.textContent=L[k].n;if(k===lang)b.className="on";b.onclick=function(){lang=k;render()};$("langs").appendChild(b)});
+  var bars=$("bars");bars.innerHTML="";
+  for(var p=0;p<NP;p++){(function(p){var e=document.createElement("i");e.innerHTML="<b></b>";e.onclick=function(){go(p)};bars.appendChild(e)})(p)}
+  paint();
+}
+function paint(){
+  var b=$("bars").children;
+  for(var i=0;i<b.length;i++)b[i].firstChild.style.width=(i<cur?100:i===cur?(playing?tick/STEP_MS*100:100):0)+"%";
+}
+function go(i,auto){cur=(i+NP)%NP;tick=0;render();if(!auto)document.querySelector(".stage").scrollIntoView({behavior:"smooth",block:"start"})}
+$("prev").onclick=function(){go(cur-1)};
+$("next").onclick=function(){go(cur+1)};
+$("play").onclick=function(){playing=!playing;tick=0;$("play").textContent=playing?"⏸":"▶️";paint()};
+var tx=0;
+$("stg").addEventListener("touchstart",function(e){tx=e.touches[0].clientX},{passive:true});
+$("stg").addEventListener("touchend",function(e){var d=e.changedTouches[0].clientX-tx;if(Math.abs(d)>70)go(cur+(d<0?1:-1))},{passive:true});
+setInterval(function(){
+  if(!playing)return;
+  tick+=100;
+  if(tick>=STEP_MS){go(cur+1,true)}else paint();
+},100);
+render();
+try{new QRCode($("qr"),{text:location.href,width:200,height:200,correctLevel:QRCode.CorrectLevel.M})}catch(e){}
+</script>
+</body>
+</html>
